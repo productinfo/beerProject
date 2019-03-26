@@ -2,26 +2,79 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Beer Query</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Holtwood+One+SC" rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
         <script id="entry-template" type="text/x-handlebars-template">
-
+            <div class="row justify-content-center">
+            {{#each beers}}
+                <div class="col-11 col-sm-6 my-4 beer-item">
+                    <div class="row">
+                        <div class="col-4 pt-5 align-middle column">
+                            {{#if image_url}}
+                            <img class="d-inline-block align-self-center" src="{{image_url}}">
+                            {{else}}
+                            <img class="d-inline-block" src="images/beerHolder.png">
+                            {{/if}}
+                        </div>
+                        <div class="col-8 text-left column">
+                            <h5 class="m-3 text-center">{{this.name}}</h5>
+                            <hr>
+                            <p class="d-none d-md-block">{{this.description}}</p>
+                            {{# if this.ingredients.malt.1.name}}
+                            <p class="my-1"><strong>Malt:</strong> <small>{{this.ingredients.malt.1.name}}</small></p>
+                            {{/if}}
+                            <p class="m-0"><strong>Yeast:</strong> <small>{{this.ingredients.yeast}}</small></p>
+                            <p class="my-1">First brewed in {{first_brewed}}</p>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+            </div>
         </script>
     </head>
     <body>
-        <header>
-            <nav>
-                mIn
-            </nav>
+        <header class="jumbotron d-block bg-light">
+            <div class="d-flex justify-content-center">
+                    <img class="float-left" src="images/beer1.png" alt="beer image">
+                    <div class="">
+                        <h1 class="">Beer QUERY</h1>
+                        <p class="lead">The place to find the perfect beer</p>
+                    </div>
+                </div>
+                <p class="text-center lead sm-hidden">The place to find the perfect beer</p>
+            </div>
 
-
+            <div class="headerInput">
+                <hr>
+                <form method="post">
+                    <input type="text" id="beerInput" placeholder="Search a beer" class="input form-control">
+                        <img src="images/search2.png" id="searchButton" alt="">
+                    <p class=" lead small m-0 pl-1"> Search by name, malt, yeast or matching food.</p>
+                </form>
+            </div>
         </header>
+
+        <div class="changeButtons">
+            <label for="" class="changeLayoutTop d-block m-0">
+            <input type="radio" name="layout" value="horizontal" checked>
+            </label>
+            <label for="" class="changeLayoutBottom d-block m-0">
+            <input type="radio" name="layout" value="vertical" >
+            </label>
+        </div>
+
         <main class="container">
-            <div class="row" id="content">
+            <div class="row" id="catalog">
 
             </div>
         </main>
 
-        <script src="/static/main.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.1/handlebars.min.js" charset="utf-8"></script>
+        <script src="js/data.js" charset="utf-8"></script>
+        <script src="js/main.js" charset="utf-8"></script>
     </body>
 </html>
