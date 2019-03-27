@@ -41,6 +41,11 @@ body{
 	opacity: 1;
 }
 
+.beer-item .text-left:hover  {
+	opacity: 0.8;
+	cursor: pointer;
+}
+
 
 @media screen and (max-width:437px) {
 	.jumbotron{
@@ -69,6 +74,9 @@ body{
 
 }
 
-.beer-item:hover h5 {
-	opacity: 0.7
+@media screen and (min-width:767px) {
+	.beer-item .text-left{
+		max-height: 400px;
+		overflow: scroll;
+	}
 }
