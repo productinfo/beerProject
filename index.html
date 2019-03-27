@@ -15,13 +15,13 @@
                     <div class="row">
                         <div class="col-4 col-sm-12 col-md-4 pt-5 align-middle column">
                             {{#if image_url}}
-                            <img class="d-inline-block align-self-center" src="{{image_url}}">
+                            <img class="beer-image d-inline-block align-self-center" src="{{image_url}}">
                             {{else}}
-                            <img class="d-inline-block" src="images/beerHolder.png">
+                            <img class="beer-image d-inline-block" src="images/beerHolder.png">
                             {{/if}}
                         </div>
                         <div class="col-8 col-sm-12 col-md-8 text-left column">
-                            <h5 class="m-3 text-center">{{this.name}}</h5>
+                            <h5 class="beer-header m-3 text-center lead">{{this.name}}</h5>
                             <hr>
                             <div class="d-none d-sm-block d-md-none">
                                 <small>Food pairing:</small></br>
@@ -42,14 +42,64 @@
             {{/each}}
             </div>
         </script>
+        <script id="beer-detail" type="text/x-handlebars-template">
+            <div class="col-12 col-sm-4">
+                {{#if image_url}}
+                <img class="beer-image" src="{{image_url}}">
+                {{else}}
+                <img class="beer-image" src="images/beerHolder.png">
+                {{/if}}
+            </div>
+            <div class="col-12 col-sm-8">
+                <h2 class="text-left">{{name}}</h2>
+                <p class="text-left lead">{{tagline}}</p>
+                <hr>
+            </div>
+
+            <div class="col-12 my-3">
+                <p class="text-left">{{description}}</p>
+                <p><strong>Yeast:</strong> {{ingredients.yeast}}</p>
+            </div>
+
+            <div class="col-12 text-left">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Food pairings: </strong></p>
+                        <ul class="ml-4 list-unstyled">
+                        {{# each food_pairing}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Malts: </strong></p>
+                        <ul class="ml-4 list-unstyled">
+                        {{# each ingredients.malt}}
+                            <li>{{this.name}}</li>
+                        {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {{# if brewers_tips}}
+            <div class="col-12 my-2 text-left">
+                <p class="m-0"><strong>Brewers tip:</strong></p>
+                <p>{{brewers_tips}}</p>
+            </div>
+            {{/if}}
+        </script>
     </head>
     <body>
-        <header class="jumbotron d-block bg-light">
+        <header class="jumbotron d-block">
             <div class="d-flex justify-content-center">
+                    <a href="/" class="unstyled">
                     <img class="float-left" src="images/beer1.png" alt="beer image">
-                    <div class="">
-                        <h1 class="">Beer QUERY</h1>
-                        <p class="lead">The place to find the perfect beer</p>
+                    </a>
+                    <div>
+                        <a href="/" class="unstyled">
+                            <h1 class="">Beer QUERY</h1>
+                            <p class="lead">The place to find the perfect beer</p>
+                        </a>
                     </div>
                 </div>
                 <p class="text-center lead sm-hidden">The place to find the perfect beer</p>
@@ -57,9 +107,11 @@
 
             <div class="headerInput">
                 <hr>
-                    <input type="text" id="beerInput" placeholder="Search a beer" class="input form-control">
-                         <img src="images/search2.png" id="searchButton" alt="">
+                <form method="post" id="queryForm">
+                    <input type="text" id="beerInput" placeholder="Search a beer" class="input form-control mb-2">
+                    <button type="submit" class="d-inline-block float-right"><img src="images/search2.png" id="searchButton" alt=""></button>
                     <p class=" lead small m-0 pl-1"> Search by name, malt, yeast or matching food.</p>
+                </form>
             </div>
         </header>
 

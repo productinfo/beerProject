@@ -1,5 +1,6 @@
 // model stores some useful data to be cached
 let model = {
+    data: data,
     searchedBeers: [],
     loadedFromData: [],
 }
@@ -7,28 +8,30 @@ let model = {
 // view handles any changes to the view
 let view = {
     catalog: document.getElementById('catalog'),
-    source: document.getElementById('entry-template').innerHTML,
+    entrySource: document.getElementById('entry-template').innerHTML,
+    detailSource: document.getElementById('beer-detail').innerHTML,
 
     cleanContainer() {
         this.catalog.innerHTML = '';
     },
 
     addToContainer(objList) {
-        let template = Handlebars.compile(this.source);
+        let template = Handlebars.compile(this.entrySource);
         let html = template({'beers': objList});
 
         this.catalog.innerHTML += html;
     },
 
-    changeLayout() {
-        document.querySelectorAll('.beer-item').forEach(beerItem => {
-            let columns = beerItem.querySelectorAll('.column')
-            columns[0].classList.toggle('col-12');
-            columns[1].classList.toggle('col-12');
-            columns[0].classList.toggle('col-4');
-            columns[1].classList.toggle('col-8');
-        });
+    containerMessage(str) {
+        this.catalog.innerHTML += `<p class="lead text-center">${str}</p>`;
     },
+
+    showBeer(beer) {
+        let template = Handlebars.compile(this.detailSource);
+        let html = template(beer)
+
+        this.catalog.innerHTML += html;
+    }
 }
 
 
@@ -39,17 +42,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // sets out event listeners and initial catalog
         init() {
+            view.cleanContainer();
+
             let initialBeers = this.fetchRandomBeersFromStorage(8, mv.data);
             view.addToContainer(initialBeers);
 
             document.addEventListener('scroll', mv.addMoreBeers);
 
-            document.getElementById('searchButton').addEventListener('click', mv.handleQuery);
+            document.getElementById('queryForm').addEventListener('submit', mv.handleQuery);
 
             document.addEventListener('click', mv.showBeerDetails)
         },
 
-        handleQuery() {
+        handleQuery(evt) {
+            evt.preventDefault();
             let value = document.getElementById('beerInput').value;
             if(!value) return;
 
@@ -57,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             mv.fetchQuery(value).then(res => {
                 view.cleanContainer();
-                view.addToContainer(res);
+                if(res.length > 0) view.addToContainer(res);
+                else view.containerMessage('No beers found.');
             });
         },
 
@@ -110,7 +117,19 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         showBeerDetails(evt) {
-            console.log(evt.target);
+            if(evt.target.classList.contains('beer-header') || evt.target.classList.contains('beer-image')) {
+
+                let id = +evt.target.parentNode.parentNode.parentNode.dataset.id;
+                console.log(id);
+
+                let list = (model.searchedBeers.length > 1) ? model.searchedBeers : model.data;
+
+                let beer = list.find(beer => beer.id === id);
+
+                document.removeEventListener('scroll',  mv.addMoreBeers)
+                view.cleanContainer();
+                view.showBeer(beer);
+            }
         }
     }
 

@@ -3,6 +3,9 @@ body {
   line-height: 1.5;
 }
 
+.jumbotron {
+  background-color: #a0794b;
+}
 .jumbotron h1 {
   font-family: "Holtwood One SC", serif;
   font-size: 2.5em;
@@ -17,6 +20,10 @@ body {
   width: 400px;
   margin: auto;
 }
+.jumbotron form button {
+  border: none;
+  background-color: inherit;
+}
 
 #catalog {
   text-align: center;
@@ -27,18 +34,20 @@ body {
 }
 
 #searchButton {
-  margin-top: 2px;
   opacity: 0.7;
-  cursor: pointer;
-  width: 30px;
-  float: right;
+  width: 40px;
 }
 
 #searchButton:hover {
   opacity: 1;
 }
 
-.beer-item .text-left:hover {
+.unstyled, .unstyled:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.beer-image:hover, .beer-header:hover {
   opacity: 0.8;
   cursor: pointer;
 }
@@ -62,13 +71,12 @@ body {
     position: fixed;
     bottom: 10px;
     right: 10px;
-    cursor: pointer;
   }
 }
 @media screen and (min-width: 767px) {
   .beer-item .text-left {
     max-height: 400px;
-    overflow: scroll;
+    overflow-y: auto;
   }
 }
 
