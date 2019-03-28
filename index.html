@@ -43,51 +43,53 @@
             </div>
         </script>
         <script id="beer-detail" type="text/x-handlebars-template">
-            <div class="col-12 col-sm-4">
-                {{#if image_url}}
-                <img src="{{image_url}}">
-                {{else}}
-                <img src="images/beerHolder.png">
+            <div class="row">
+                <div class="col-12 col-sm-4">
+                    {{#if image_url}}
+                    <img src="{{image_url}}">
+                    {{else}}
+                    <img src="images/beerHolder.png">
+                    {{/if}}
+                </div>
+                <div class="col-12 col-sm-8">
+                    <h2 class="text-left">{{name}}</h2>
+                    <p class="text-left lead">{{tagline}}</p>
+                    <hr>
+                </div>
+
+                <div class="col-12 my-3">
+                    <p class="text-left">{{description}}</p>
+                    <hr>
+                </div>
+                <div class="col-12 text-left">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <p><strong>Yeast:</strong> {{ingredients.yeast}}</p>
+                            <p class="mb-0"><strong>Food pairings: </strong></p>
+                            <ul class="ml-4 list-unstyled">
+                            {{# each food_pairing}}
+                                <li>{{this}}</li>
+                            {{/each}}
+                            </ul>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <p class="mb-0"><strong>Malts: </strong></p>
+                            <ul class="ml-4 list-unstyled">
+                            {{# each ingredients.malt}}
+                                <li>{{this.name}}</li>
+                            {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                {{# if brewers_tips}}
+                <div class="col-12 my-2 text-left">
+                    <p class="m-0"><strong>Brewers tip:</strong></p>
+                    <p>{{brewers_tips}}</p>
+                </div>
                 {{/if}}
             </div>
-            <div class="col-12 col-sm-8">
-                <h2 class="text-left">{{name}}</h2>
-                <p class="text-left lead">{{tagline}}</p>
-                <hr>
-            </div>
-
-            <div class="col-12 my-3">
-                <p class="text-left">{{description}}</p>
-                <hr>
-            </div>
-            <div class="col-12 text-left">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <p><strong>Yeast:</strong> {{ingredients.yeast}}</p>
-                        <p class="mb-0"><strong>Food pairings: </strong></p>
-                        <ul class="ml-4 list-unstyled">
-                        {{# each food_pairing}}
-                            <li>{{this}}</li>
-                        {{/each}}
-                        </ul>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p class="mb-0"><strong>Malts: </strong></p>
-                        <ul class="ml-4 list-unstyled">
-                        {{# each ingredients.malt}}
-                            <li>{{this.name}}</li>
-                        {{/each}}
-                        </ul>
-                    </div>
-                </div>
-                <hr>
-            </div>
-            {{# if brewers_tips}}
-            <div class="col-12 my-2 text-left">
-                <p class="m-0"><strong>Brewers tip:</strong></p>
-                <p>{{brewers_tips}}</p>
-            </div>
-            {{/if}}
         </script>
     </head>
     <body>
@@ -122,9 +124,6 @@
 
             </div>
 
-            <div class="row" id="details" hidden>
-
-            </div>
         </main>
 
         <footer class="container-fluid">

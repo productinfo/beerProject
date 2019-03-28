@@ -24,7 +24,7 @@ let view = {
 
     addLoadMoreButton() {
         let div = document.createElement('div');
-        div.classList.add('col-12', 'my-2');
+        div.classList.add('col-12', 'my-4');
         div.innerHTML = '<button class="btn btn-primary">Load more beers</button>';
         this.catalog.appendChild(div);
         return div;
