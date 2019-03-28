@@ -3,8 +3,12 @@ body{
 	line-height: 1.5;
 }
 
+footer, .jumbotron {
+	background-color: rgb(60, 60, 60);
+	color: whitesmoke;
+}
+
 .jumbotron {
-	background-color: #a0794b;
 
 	h1 {
 		font-family: 'Holtwood One SC', serif;

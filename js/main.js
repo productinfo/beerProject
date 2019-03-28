@@ -22,6 +22,14 @@ let view = {
         this.catalog.innerHTML += html;
     },
 
+    addLoadMoreButton() {
+        let div = document.createElement('div');
+        div.classList.add('col-12', 'my-2');
+        div.innerHTML = '<button class="btn btn-primary">Load more beers</button>';
+        this.catalog.appendChild(div);
+        return div;
+    },
+
     containerMessage(str) {
         this.catalog.innerHTML += `<p class="lead text-center">${str}</p>`;
     },
@@ -31,7 +39,7 @@ let view = {
         let html = template(beer)
 
         this.catalog.innerHTML += html;
-    }
+    },
 }
 
 
@@ -47,7 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
             let initialBeers = this.fetchRandomBeersFromStorage(8, mv.data);
             view.addToContainer(initialBeers);
 
-            document.addEventListener('scroll', mv.addMoreBeers);
+            let div = view.addLoadMoreButton();
+
+            div.querySelector('button').addEventListener('click', () => {
+                div.remove();
+                document.addEventListener('scroll', mv.addMoreBeers);
+            })
 
             document.getElementById('queryForm').addEventListener('submit', mv.handleQuery);
 
@@ -112,8 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            let moreBeers = mv.fetchRandomBeersFromStorage(4, mv.data);
-            view.addToContainer(moreBeers);
+            setTimeout(() => {
+                let moreBeers = mv.fetchRandomBeersFromStorage(6, mv.data);
+                view.addToContainer(moreBeers);
+            }, 600);
         },
 
         showBeerDetails(evt) {

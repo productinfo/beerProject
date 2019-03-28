@@ -58,12 +58,12 @@
 
             <div class="col-12 my-3">
                 <p class="text-left">{{description}}</p>
-                <p><strong>Yeast:</strong> {{ingredients.yeast}}</p>
+                <hr>
             </div>
-
             <div class="col-12 text-left">
                 <div class="row">
                     <div class="col-12 col-md-6">
+                        <p><strong>Yeast:</strong> {{ingredients.yeast}}</p>
                         <p class="mb-0"><strong>Food pairings: </strong></p>
                         <ul class="ml-4 list-unstyled">
                         {{# each food_pairing}}
@@ -80,6 +80,7 @@
                         </ul>
                     </div>
                 </div>
+                <hr>
             </div>
             {{# if brewers_tips}}
             <div class="col-12 my-2 text-left">
@@ -125,6 +126,26 @@
 
             </div>
         </main>
+
+        <footer>
+            <div class="row justify-content-around text-center">
+                <div class="col-4 col-sm-3 p-2">
+                    <img class="w-50" src="images/pint.png" alt="">
+                    <h5 class="mb-0">Honor Project</h5>
+                    <small class="d-none d-md-block">Full-Stack Web Development with React by
+The Hong Kong University of Science and Technology.</small>
+                </div>
+                <div class="col-4 col-sm-3 p-2">
+                    <img class="w-50" src="images/barrel.png" alt="">
+                    <h5 class="my-2">Project By Joao Schapke.</h5>
+                </div>
+                <div class="col-4 col-sm-3 p-2">
+                    <img class="w-50" src="images/cheers.png" alt="">
+                    <p class="mt-2 mb-0">Enjoy, browse and find beers.</p>
+                    <h5>Cheers.</h5>
+                </div>
+            </div>
+        </footer>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.1/handlebars.min.js" charset="utf-8"></script>
         <script src="js/data.js" charset="utf-8"></script>
